@@ -1,0 +1,42 @@
+<html lang="en">
+  <head>
+    <script src="./group.js"></script>
+  </head>
+  <body>
+    <script src="https://unpkg.com/gojs@2.3.11/release/go.js"></script>
+    <div id="allSampleContent" class="p-4 w-full">
+      <div id="sample">
+        <div
+          id="myDiagramDiv"
+          style="
+            height: 600px;
+            width: 100%;
+            border: 1px solid black;
+            position: relative;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            cursor: auto;
+            "
+        >
+          <canvas
+            tabindex="0"
+            width="1889"
+            height="600"
+            style="
+              position: absolute;
+              top: 0px;
+              left: 0px;
+              z-index: 2;
+              user-select: none;
+              touch-action: none;
+              width: 1889px;
+              height: 600px;
+              cursor: auto;
+            "
+          ></canvas>
+          <div style="position: absolute; overflow: auto; width: 1889px; height: 600px; z-index: 1">
+            <div style="position: absolute; width: 1px; height: 1px"></div>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>
