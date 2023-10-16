@@ -1,42 +1,23 @@
 <html lang="en">
   <head>
     <script src="./group.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.1/lottie.min.js"></script>
   </head>
+  <style>
+    body {
+      position: absolute;
+    }
+  </style>
   <body>
-    <script src="https://unpkg.com/gojs@2.3.11/release/go.js"></script>
-    <div id="allSampleContent" class="p-4 w-full">
-      <div id="sample">
-        <div
-          id="myDiagramDiv"
-          style="
-            height: 600px;
-            width: 100%;
-            border: 1px solid black;
-            position: relative;
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            cursor: auto;
-            "
-        >
-          <canvas
-            tabindex="0"
-            width="1889"
-            height="600"
-            style="
-              position: absolute;
-              top: 0px;
-              left: 0px;
-              z-index: 2;
-              user-select: none;
-              touch-action: none;
-              width: 1889px;
-              height: 600px;
-              cursor: auto;
-            "
-          ></canvas>
-          <div style="position: absolute; overflow: auto; width: 1889px; height: 600px; z-index: 1">
-            <div style="position: absolute; width: 1px; height: 1px"></div>
-          </div>
-        </div>
-    </div>
+    <div id="lottie-animation"></div>
+    <script>
+      lottie.loadAnimation({
+        container: document.getElementById('lottie-animation'), // 애니메이션을 보여줄 div 요소
+        renderer: 'svg', // 렌더링 방식 (canvas 또는 svg)
+        loop: true, // 애니메이션을 반복할지 여부
+        autoplay: true, // 자동 재생할지 여부
+        path: './a.json', // Lottie JSON 파일의 경로
+      });
+    </script>
   </body>
 </html>

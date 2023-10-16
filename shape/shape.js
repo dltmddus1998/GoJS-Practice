@@ -1,92 +1,117 @@
-function init() {
-  // Since 2.2 you can also author concise templates with method chaining instead of GraphObject.make
-  // For details, see https://gojs.net/latest/intro/buildingObjects.html
-  const $ = go.GraphObject.make; // for conciseness in defining templates
-
-  // a collection of colors
-  var colors = {
-    blue: '#2a6dc0',
-    orange: '#ea2857',
-    green: '#1cc1bc',
-    gray: '#5b5b5b',
-    white: '#F5F5F5',
+drawChart = function () {
+  const radius = {
+    scale: d3.scaleSqrt().domain([0, 2e7]).range([0, 35]),
+    scaleData: [2e6, 1e7, 2e7],
+    metric: 'dep_delay',
   };
 
-  // The first Diagram showcases what the Nodes might look like "in action"
-  myDiagram = new go.Diagram('myDiagramDiv', {
-    'undoManager.isEnabled': true,
-    layout: $(go.TreeLayout),
-  });
+  const fill = {
+    scale: d3.scaleSequential(d3.interpolateRdYlBu).domain([0, 20]),
+    metric: 'dep_delay',
+  };
 
-  // "icons" is defined above in the previous .
+  const chart = new Chart(data, radius, fill);
+  return chart.div;
+};
 
-  // A data binding conversion function. Given an icon name, return a Geometry.
-  // This assumes that all icons want to be filled.
-  // This caches the Geometry, because the Geometry may be shared by multiple Shapes.
-  function geoFunc(geoname) {
-    var geo = icons[geoname];
-    if (geo === undefined) geo = icons['heart']; // use this for an unknown icon name
-    if (typeof geo === 'string') {
-      geo = icons[geoname] = go.Geometry.parse(geo, true); // fill each geometry
-    }
-    return geo;
+class Chart {
+  constructor(dataMap, radius, fill = {}) {
+    const data = Array.from(dataMap).map((d) => d[1]);
+    const interval = 500;
+    const width = 960;
+    const height = 600;
+    const path = d3.geoPath();
+    const projection = d3
+      .geoAlbersUsa()
+      .scale(1280)
+      .translate([width / 2, height / 2]);
+
+    this.radius = radius;
+    this.fill = fill;
+
+    //this.radiusTransition = d3.transition().duration(interval);
+
+    const svg = d3.select(DOM.svg(width, height)).style('width', '100%').style('font-family', 'sans-serif').style('height', 'auto');
+
+    svg.append('path').datum(topojson.feature(us, us.objects.nation)).attr('fill', '#ccc').attr('d', path);
+
+    svg
+      .append('path')
+      .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+      .attr('fill', 'none')
+      .attr('stroke', 'white')
+      .attr('stroke-linejoin', 'round')
+      .attr('d', path);
+
+    this.circles = svg
+      .append('g')
+      .attr('stroke', '#fff')
+      .attr('opacity', () => (this.fill.scale !== undefined ? 1 : 0.5))
+      .attr('stroke-width', 0.5)
+      .selectAll('circle')
+      .data(data)
+      .enter()
+      .append('circle')
+      .attr('transform', (d) => `translate(${projection(d.geometry.coordinates)})`)
+      .attr('r', 5);
+
+    this.div = DOM.element('div');
+    const input = this.drawInput(1, 12);
+    this.div.appendChild(svg.node());
+    this.div.appendChild(input);
   }
 
-  // Define a simple template consisting of the icon surrounded by a filled circle
-  myDiagram.nodeTemplate = $(
-    go.Node,
-    'Auto',
-    $(go.Shape, 'Circle', { fill: 'lightcoral', strokeWidth: 0, width: 65, height: 65 }, new go.Binding('fill', 'color')),
-    $(go.Shape, { margin: 3, fill: colors['white'], strokeWidth: 0 }, new go.Binding('geometry', 'geo', geoFunc)),
-    // Each node has a tooltip that reveals the name of its icon
-    {
-      toolTip: $(
-        'ToolTip',
-        { 'Border.stroke': colors['gray'], 'Border.strokeWidth': 2 },
-        $(go.TextBlock, { margin: 8, stroke: colors['gray'], font: 'bold 16px sans-serif' }, new go.Binding('text', 'geo'))
-      ),
-    }
-  );
+  drawInput(min, max) {
+    const div = html`
+      <input type="range" min=${min} max=${max} value=${min} step="1" />
+      <input type="number" min=${min} max=${max} value=${min} style="width:50px" />
+    `;
+    const range = div.querySelector('[type=range]');
+    const number = div.querySelector('[type=number]');
+    div.value = range.value = number.value = min;
 
-  // Define a Link template that routes orthogonally, with no arrowhead
-  myDiagram.linkTemplate = $(go.Link, { routing: go.Link.Orthogonal, corner: 5 }, $(go.Shape, { strokeWidth: 3.5, stroke: colors['gray'] })); // the link shape
+    const update = _.debounce(() => {
+      this.update(div.value);
+    }, 300);
 
-  // Create the model data that will be represented by Nodes and Links
-  myDiagram.model = new go.GraphLinksModel(
-    [
-      { key: 1, geo: 'file', color: colors['blue'] },
-      { key: 2, geo: 'alarm', color: colors['orange'] },
-      { key: 3, geo: 'lab', color: colors['blue'] },
-      { key: 4, geo: 'earth', color: colors['blue'] },
-      { key: 5, geo: 'heart', color: colors['green'] },
-      { key: 6, geo: 'arrow-up-right', color: colors['blue'] },
-      { key: 7, geo: 'html5', color: colors['orange'] },
-      { key: 8, geo: 'twitter', color: colors['orange'] },
-    ],
-    [
-      { from: 1, to: 2 },
-      { from: 1, to: 3 },
-      { from: 3, to: 4 },
-      { from: 4, to: 5 },
-      { from: 4, to: 6 },
-      { from: 3, to: 7 },
-      { from: 3, to: 8 },
-    ]
-  );
+    range.addEventListener('input', () => {
+      number.value = div.value = range.valueAsNumber;
+      update();
+    });
+    number.addEventListener('input', () => {
+      range.value = div.value = number.valueAsNumber;
+      update();
+    });
 
-  // The second Diagram showcases every icon
-  myDiagram2 = new go.Diagram('myDiagramDiv2', {
-    // share node templates between both Diagrams
-    nodeTemplate: myDiagram.nodeTemplate,
-    // simple grid layout
-    layout: $(go.GridLayout),
-  });
-
-  // Convert the icons collection into an Array of JavaScript objects
-  var nodeArray = [];
-  for (var k in icons) {
-    nodeArray.push({ geo: k, color: colors['blue'] });
+    return div;
   }
-  myDiagram2.model.nodeDataArray = nodeArray;
 }
-window.addEventListener('DOMContentLoaded', init);
+
+data = new Map(
+  (
+    await d3.csv(
+      'https://gist.githubusercontent.com/vizbiz/' +
+        '0a651bbe43013b80c03dbd1c13f49a8b/raw/303fd2dbfc63761e6614e89dd6b0d7b382e68cad/' +
+        'latlongmeans.csv',
+      (d) => {
+        return {
+          type: 'Feature',
+          properties: {
+            month: d.Month,
+            origin: d.Origin,
+            origin_name: d.OriginName,
+            dep_delay: +d.DepDelay,
+          },
+          geometry: {
+            type: 'Point',
+            coordinates: [d.Longitude, d.Latitude],
+          },
+        };
+      }
+    )
+  )
+    .sort((a, b) => b.properties.max - a.properties.max)
+    .map((d) => [d.properties.origin.toLowerCase(), d])
+);
+
+drawChart();
