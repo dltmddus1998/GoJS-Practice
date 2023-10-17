@@ -9,15 +9,12 @@
     }
   </style>
   <body>
-    <div id="lottie-animation"></div>
-    <script>
-      lottie.loadAnimation({
-        container: document.getElementById('lottie-animation'), // 애니메이션을 보여줄 div 요소
-        renderer: 'svg', // 렌더링 방식 (canvas 또는 svg)
-        loop: true, // 애니메이션을 반복할지 여부
-        autoplay: true, // 자동 재생할지 여부
-        path: './a.json', // Lottie JSON 파일의 경로
-      });
-    </script>
+    <div style="display: flex; justify-content: center">
+      <div id="lottie-animation"></div>
+      <hr style="background-color: #808080; border: 1px solid #808080; width: 1; height: 800px" />
+    </div>
+    <button id="add-btn">Add Circle</button>
+    <button id="delete-btn">Delete Circle</button>
+    <script src="./group.js"></script>
   </body>
 </html>
