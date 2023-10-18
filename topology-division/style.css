@@ -1,0 +1,23 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topology-region__name {
+  display: flex;
+  font-weight: 600;
+}
+
+#region-id {
+  margin-right: 1.2rem;
+}
+
+.topology-wrap {
+}
+
+.topology-cont {
+  border: 8px solid #e9b824;
+  width: 100rem;
+  height: 40rem;
+}

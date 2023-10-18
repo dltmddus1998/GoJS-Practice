@@ -1,0 +1,66 @@
+{
+  "region-id": "ap-northeast-2",
+  "region-name": "Seoul",
+  "vpc": {
+    "vpc-region1": {
+      "A": [
+        {
+          "vpcId": "Subnet-Seoul-PublicA",
+          "vpcIp": "10.1.1.0/24"
+        },
+        {
+          "vpcId": "Subnet-Seoul-PrivateA",
+          "vpcIp": "10.1.3.0/24"
+        }
+      ],
+      "B": [
+        {
+          "vpcId": "Subnet-Seoul-PrivateB",
+          "type": "B",
+          "vpcIp": "10.1.2.0/24"
+        },
+        {
+          "vpcId": "Subnet-Seoul-PublicB",
+          "type": "B",
+          "vpcIp": "10.1.4.0/24"
+        }
+      ]
+    },
+    "vpc-region2": {
+      "A": [
+        {
+          "vpcId": "Subnet-Seoul2-PublicA",
+          "vpcIp": "10.2.1.0/24"
+        },
+        {
+          "vpcId": "Subnet-Seoul2-PrivateA",
+          "vpcIp": "10.2.4.0/24"
+        },
+        {
+          "vpcId": "Subnet-Seoul2-IsolatedA",
+          "vpcIp": "10.2.7.0/24"
+        }
+      ],
+      "B": [
+        {
+          "vpcId": "Subnet-Seoul2-PrivateB",
+          "vpcIp": "10.2.5.0/24"
+        },
+        {
+          "vpcId": "Subnet-Seoul2-IsolatedB",
+          "vpcIp": "10.2.8.0/24"
+        }
+      ],
+      "C": [
+        {
+          "vpcId": "Subnet-Seoul2-PublicC",
+          "vpcIp": "10.2.3.0/24"
+        },
+        {
+          "vpcId": "Subnet-Seoul2-IsolatedAC",
+          "vpcIp": "10.2.9.0/24"
+        }
+      ]
+    }
+  }
+}
