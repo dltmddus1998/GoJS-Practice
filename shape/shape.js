@@ -1,117 +1,166 @@
-drawChart = function () {
-  const radius = {
-    scale: d3.scaleSqrt().domain([0, 2e7]).range([0, 35]),
-    scaleData: [2e6, 1e7, 2e7],
-    metric: 'dep_delay',
-  };
+(function () {
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-animation'), // 애니메이션을 보여줄 div 요소
+    renderer: 'svg', // 렌더링 방식 (canvas 또는 svg)
+    loop: true, // 애니메이션을 반복할지 여부
+    autoplay: true, // 자동 재생할지 여부
+    path: './a.json', // Lottie JSON 파일의 경로
+  });
 
-  const fill = {
-    scale: d3.scaleSequential(d3.interpolateRdYlBu).domain([0, 20]),
-    metric: 'dep_delay',
-  };
+  function addPin() {
+    fetch('./a.json')
+      .then((response) => response.json())
+      .then((json) => {
+        json['layers'].unshift({
+          ty: 4,
+          nm: 'pin3',
+          ip: 0,
+          st: 0,
+          ind: 3,
+          hix: 3,
+          ks: {
+            o: { a: 0, k: 100 },
+            or: { a: 0, k: [0, 0, 0] },
+            a: { a: 0, k: [-440, -459, 0] },
+            p: {
+              s: true,
+              x: { a: 0, k: 50 },
+              y: {
+                a: 1,
+                k: [
+                  { t: 0, s: [43], e: [50], i: { x: [0.515], y: [0.955] }, o: { x: [0.455], y: [0.03] } },
+                  { t: 30, s: [50], e: [43], i: { x: [0.515], y: [0.955] }, o: { x: [0.455], y: [0.03] } },
+                  { t: 60 },
+                ],
+              },
+            },
+            rx: { a: 0, k: 0 },
+            ry: { a: 0, k: 0 },
+            rz: { a: 0, k: 0 },
+            s: { a: 0, k: [50, 50, 100] },
+          },
+          shapes: [
+            {
+              ty: 'gr',
+              nm: 'pin shape group',
+              it: [
+                {
+                  ty: 'sh',
+                  ks: {
+                    a: 0,
+                    k: {
+                      c: true,
+                      v: [
+                        [50.1094, 13],
+                        [29, 34.1094],
+                        [31.9531, 44.9375],
+                        [50.1094, 69],
+                        [68.2656, 44.9375],
+                        [71.2187, 34.1094],
+                      ],
+                      i: [
+                        [11.658299999999997, 0],
+                        [0, -11.6584],
+                        [-2.1899999999999977, -2.9024],
+                        [-1.1094000000000008, 0],
+                        [0, 0],
+                        [0, 3.531500000000001],
+                      ],
+                      o: [
+                        [-11.6584, 0],
+                        [0, 3.8988000000000014],
+                        [0, 0],
+                        [1.1094000000000008, 0],
+                        [1.9891999999999967, -2.6362000000000023],
+                        [0.00010000000000331966, -11.6584],
+                      ],
+                    },
+                  },
+                },
+                {
+                  ty: 'sh',
+                  ks: {
+                    a: 0,
+                    k: {
+                      c: true,
+                      v: [
+                        [50.1094, 25.2261],
+                        [58.9927, 34.1093],
+                        [50.1094, 42.9927],
+                        [41.2261, 34.1094],
+                      ],
+                      i: [
+                        [-4.9054, 0],
+                        [0, -4.905299999999997],
+                        [4.9054, 0],
+                        [0, 4.9054],
+                      ],
+                      o: [
+                        [4.9054, 0],
+                        [0, 4.9055000000000035],
+                        [-4.9054, 0],
+                        [0, -4.9054],
+                      ],
+                    },
+                  },
+                },
+                { ty: 'st', o: { a: 0, k: 0 }, w: { a: 0, k: 0 }, c: { a: 0, k: [0, 0, 0, 0] }, lc: 3, lj: 1, ml: 1 },
+                { ty: 'fl', o: { a: 0, k: 100 }, r: 1, c: { a: 0, k: [0.8509803921568627, 0.3254901960784314, 0.30196078431372547, 1] } },
+                {
+                  ty: 'tr',
+                  o: { a: 0, k: 100 },
+                  a: { a: 0, k: [0, 0] },
+                  s: { a: 0, k: [100, 100] },
+                  p: { a: 0, k: [0, 0] },
+                  r: { a: 0, k: 0 },
+                },
+              ],
+            },
+          ],
+          op: 90,
+        });
 
-  const chart = new Chart(data, radius, fill);
-  return chart.div;
-};
+        const data = json;
 
-class Chart {
-  constructor(dataMap, radius, fill = {}) {
-    const data = Array.from(dataMap).map((d) => d[1]);
-    const interval = 500;
-    const width = 960;
-    const height = 600;
-    const path = d3.geoPath();
-    const projection = d3
-      .geoAlbersUsa()
-      .scale(1280)
-      .translate([width / 2, height / 2]);
+        console.log(data);
 
-    this.radius = radius;
-    this.fill = fill;
+        lottie.destroy();
 
-    //this.radiusTransition = d3.transition().duration(interval);
-
-    const svg = d3.select(DOM.svg(width, height)).style('width', '100%').style('font-family', 'sans-serif').style('height', 'auto');
-
-    svg.append('path').datum(topojson.feature(us, us.objects.nation)).attr('fill', '#ccc').attr('d', path);
-
-    svg
-      .append('path')
-      .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
-      .attr('fill', 'none')
-      .attr('stroke', 'white')
-      .attr('stroke-linejoin', 'round')
-      .attr('d', path);
-
-    this.circles = svg
-      .append('g')
-      .attr('stroke', '#fff')
-      .attr('opacity', () => (this.fill.scale !== undefined ? 1 : 0.5))
-      .attr('stroke-width', 0.5)
-      .selectAll('circle')
-      .data(data)
-      .enter()
-      .append('circle')
-      .attr('transform', (d) => `translate(${projection(d.geometry.coordinates)})`)
-      .attr('r', 5);
-
-    this.div = DOM.element('div');
-    const input = this.drawInput(1, 12);
-    this.div.appendChild(svg.node());
-    this.div.appendChild(input);
+        lottie.loadAnimation({
+          container: document.getElementById('lottie-animation'), // 애니메이션을 보여줄 div 요소
+          renderer: 'svg', // 렌더링 방식 (canvas 또는 svg)
+          loop: true, // 애니메이션을 반복할지 여부
+          autoplay: true, // 자동 재생할지 여부
+          animationData: data,
+        });
+      });
   }
 
-  drawInput(min, max) {
-    const div = html`
-      <input type="range" min=${min} max=${max} value=${min} step="1" />
-      <input type="number" min=${min} max=${max} value=${min} style="width:50px" />
-    `;
-    const range = div.querySelector('[type=range]');
-    const number = div.querySelector('[type=number]');
-    div.value = range.value = number.value = min;
+  function deletePin() {
+    fetch('./a.json')
+      .then((response) => response.json())
+      .then((json) => {
+        json['layers'].forEach((layer, idx) => {
+          if (layer['nm'] === 'pin3') {
+            json['layers'].splice(idx, idx);
+          }
+        });
 
-    const update = _.debounce(() => {
-      this.update(div.value);
-    }, 300);
+        lottie.destroy();
 
-    range.addEventListener('input', () => {
-      number.value = div.value = range.valueAsNumber;
-      update();
-    });
-    number.addEventListener('input', () => {
-      range.value = div.value = number.valueAsNumber;
-      update();
-    });
-
-    return div;
+        lottie.loadAnimation({
+          container: document.getElementById('lottie-animation'), // 애니메이션을 보여줄 div 요소
+          renderer: 'svg', // 렌더링 방식 (canvas 또는 svg)
+          loop: true, // 애니메이션을 반복할지 여부
+          autoplay: true, // 자동 재생할지 여부
+          animationData: json,
+        });
+      });
   }
-}
 
-data = new Map(
-  (
-    await d3.csv(
-      'https://gist.githubusercontent.com/vizbiz/' +
-        '0a651bbe43013b80c03dbd1c13f49a8b/raw/303fd2dbfc63761e6614e89dd6b0d7b382e68cad/' +
-        'latlongmeans.csv',
-      (d) => {
-        return {
-          type: 'Feature',
-          properties: {
-            month: d.Month,
-            origin: d.Origin,
-            origin_name: d.OriginName,
-            dep_delay: +d.DepDelay,
-          },
-          geometry: {
-            type: 'Point',
-            coordinates: [d.Longitude, d.Latitude],
-          },
-        };
-      }
-    )
-  )
-    .sort((a, b) => b.properties.max - a.properties.max)
-    .map((d) => [d.properties.origin.toLowerCase(), d])
-);
+  const addPinBtn = document.getElementById('add-pin');
+  addPinBtn.addEventListener('click', addPin);
 
-drawChart();
+  const deletePinBtn = document.getElementById('delete-pin');
+  deletePinBtn.addEventListener('click', deletePin);
+})();

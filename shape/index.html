@@ -5,8 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
     <meta name="description" content="Use SVG geometry path strings to create vector icons, rather than using images." />
     <link rel="stylesheet" href="../assets/css/style.css" />
-    <script src="./shape.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.1/lottie.min.js"></script>
     <title>Icons GoJS Sample</title>
+    <style>
+      #add-pin {
+        width: 240px;
+        height: 52px;
+        border: none;
+        border-radius: 8px;
+        background-color: #3876bf;
+        color: #ffffff;
+        font-size: 1.2rem;
+      }
+      #add-pin:hover {
+        background-color: #192655;
+        cursor: pointer;
+      }
+      #delete-pin {
+        width: 240px;
+        height: 52px;
+        border: none;
+        border-radius: 8px;
+        background-color: #ff6969;
+        color: #ffffff;
+        font-size: 1.2rem;
+      }
+      #delete-pin:hover {
+        background-color: #c70039;
+        cursor: pointer;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <button id="add-pin">Add Pin</button>
+    <button id="delete-pin">Delete Pin</button>
+    <div id="lottie-animation"></div>
+    <script src="./shape.js"></script>
+  </body>
 </html>
