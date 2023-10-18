@@ -54,7 +54,6 @@
         return response.json();
       })
       .then((json) => {
-        console.log(json['layers']);
         json['layers'].forEach((layer, idx) => {
           if (layer['nm'] === 'circles2') {
             json['layers'].splice(idx, idx);
