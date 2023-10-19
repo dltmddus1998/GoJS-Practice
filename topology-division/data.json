@@ -3,6 +3,7 @@
   "region-name": "Seoul",
   "vpc": {
     "vpc-region1": {
+      "vpcIpArea": "10.1.0.0/16",
       "A": [
         {
           "vpcId": "Subnet-Seoul-PublicA",
@@ -27,6 +28,7 @@
       ]
     },
     "vpc-region2": {
+      "vpcIpArea": "10.2.0.0/16",
       "A": [
         {
           "vpcId": "Subnet-Seoul2-PublicA",

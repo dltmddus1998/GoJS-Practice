@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"
+      integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bezier-js@6.1.4/src/bezier.min.js"></script>
+    <title>Document</title>
+    <style>
+      button {
+        width: 12rem;
+        height: 2.5rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+      }
+      button:hover {
+        cursor: pointer;
+      }
+      #moveLayerButton {
+        background-color: #98e4ff;
+      }
+      #moveLayerBackButton {
+        background-color: #f8bdeb;
+      }
+      #moveLayerButton:hover {
+        background-color: #687eff;
+      }
+      #moveLayerBackButton:hover {
+        background-color: #e95793;
+      }
+      #createNewButton {
+        background-color: #f5eec8;
+      }
+      #createNewButton:hover {
+        background-color: #d6d46d;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="moveLayerButton">레이어 이동</button>
+    <button id="moveLayerBackButton">레이어 복구</button>
+    <button id="createNewButton">새 레이어 생성</button>
+    <div style="display: flex; justify-content: center">
+      <div id="lottie-animation"></div>
+      <div id="lottie-animation-re"></div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

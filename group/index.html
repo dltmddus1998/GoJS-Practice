@@ -7,14 +7,27 @@
     body {
       position: absolute;
     }
+    button {
+      width: 12rem;
+      height: 4.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    #addPinBtn {
+      background-color: #f8bdeb;
+    }
+    #addPinBtn:hover {
+      cursor: pointer;
+      background-color: #e95793;
+    }
   </style>
   <body>
     <div style="display: flex; justify-content: center">
+      <button id="addPinBtn">Add a pin</button>
       <div id="lottie-animation"></div>
-      <hr style="background-color: #808080; border: 1px solid #808080; width: 1; height: 800px" />
     </div>
-    <button id="add-btn">Add Circle</button>
-    <button id="delete-btn">Delete Circle</button>
     <script src="./group.js"></script>
   </body>
 </html>

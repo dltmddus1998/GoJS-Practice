@@ -20,4 +20,16 @@ body {
   border: 8px solid #e9b824;
   width: 100rem;
   height: 40rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.topology-cont__zone {
+  border: 8px solid #c70039;
+  width: 80rem;
+  height: 10rem;
+}
+
+.zone {
 }
