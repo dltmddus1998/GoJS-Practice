@@ -7,74 +7,309 @@
     path: './a.json', // Lottie JSON 파일의 경로
   });
 
-  function makeCircle() {
+  document.getElementById('addPinBtn').addEventListener('click', () => {
     fetch('./a.json')
-      .then((response) => {
-        return response.json();
-      })
-      .then(async (json) => {
+      .then((response) => response.json())
+      .then((json) => {
         json['layers'].push({
           ddd: 0,
-          ind: 7,
-          ty: 2,
-          nm: 'circles2',
-          refId: 'image_circle',
+          ind: 4,
+          ty: 4,
+          nm: 'Layer 4',
           sr: 1,
           ks: {
             o: { a: 0, k: 100, ix: 11 },
             r: { a: 0, k: 0, ix: 10 },
-            p: { a: 0, k: [427, 296, 0], ix: 2 },
-            a: { a: 0, k: [-1007, -2296, 0], ix: 1 },
-            s: { a: 0, k: [5, 5, 100], ix: 6 },
+            p: { a: 0, k: [635.752, 398.332, 0], ix: 2, l: 2 },
+            a: { a: 0, k: [95.752, -141.668, 0], ix: 1, l: 2 },
+            s: {
+              a: 1,
+              k: [
+                { i: { x: [0.667, 0.667, 0.667], y: [1, 1, 1] }, o: { x: [0.333, 0.333, 0.333], y: [0, 0, 0] }, t: 19, s: [0, 0, 100] },
+                {
+                  i: { x: [0.667, 0.667, 0.667], y: [1, 1, 1] },
+                  o: { x: [0.333, 0.333, 0.333], y: [0, 0, 0] },
+                  t: 29,
+                  s: [110, 110, 100],
+                },
+                { i: { x: [0.667, 0.667, 0.667], y: [1, 1, 1] }, o: { x: [0.167, 0.167, 0.167], y: [0, 0, 0] }, t: 34, s: [95, 95, 100] },
+                { i: { x: [0.667, 0.667, 0.667], y: [1, 1, 1] }, o: { x: [0.16, 0.16, 0.16], y: [0, 0, 0] }, t: 39, s: [100, 100, 100] },
+                {
+                  i: { x: [0.833, 0.833, 0.833], y: [1, 1, 1] },
+                  o: { x: [0.333, 0.333, 0.333], y: [0, 0, 0] },
+                  t: 81,
+                  s: [100, 100, 100],
+                },
+                { i: { x: [0.667, 0.667, 0.667], y: [1, 1, 1] }, o: { x: [0.333, 0.333, 0.333], y: [0, 0, 0] }, t: 86, s: [95, 95, 100] },
+                {
+                  i: { x: [0.667, 0.667, 0.667], y: [1, 1, 1] },
+                  o: { x: [0.333, 0.333, 0.333], y: [0, 0, 0] },
+                  t: 91,
+                  s: [110, 110, 100],
+                },
+                { t: 101, s: [0, 0, 100] },
+              ],
+              ix: 6,
+              l: 2,
+            },
           },
           ao: 0,
+          shapes: [
+            {
+              ty: 'gr',
+              it: [
+                {
+                  ind: 0,
+                  ty: 'sh',
+                  ix: 1,
+                  ks: {
+                    a: 0,
+                    k: {
+                      i: [
+                        [0, -7.417],
+                        [7.417, 0],
+                        [0, 7.417],
+                        [-7.417, 0],
+                      ],
+                      o: [
+                        [0, 7.417],
+                        [-7.417, 0],
+                        [0, -7.417],
+                        [7.417, 0],
+                      ],
+                      v: [
+                        [109.177, -196.476],
+                        [95.747, -183.046],
+                        [82.317, -196.476],
+                        [95.747, -209.906],
+                      ],
+                      c: true,
+                    },
+                    ix: 2,
+                  },
+                  nm: 'Path 1',
+                  mn: 'ADBE Vector Shape - Group',
+                  hd: false,
+                },
+                {
+                  ty: 'st',
+                  c: { a: 0, k: [0.192156866193, 0.168627455831, 0.450980395079, 1], ix: 3 },
+                  o: { a: 0, k: 100, ix: 4 },
+                  w: { a: 0, k: 8, ix: 5 },
+                  lc: 1,
+                  lj: 1,
+                  ml: 10,
+                  bm: 0,
+                  nm: 'Stroke 1',
+                  mn: 'ADBE Vector Graphic - Stroke',
+                  hd: false,
+                },
+                {
+                  ty: 'fl',
+                  c: { a: 0, k: [1, 1, 1, 1], ix: 4 },
+                  o: { a: 0, k: 100, ix: 5 },
+                  r: 1,
+                  bm: 0,
+                  nm: 'Fill 1',
+                  mn: 'ADBE Vector Graphic - Fill',
+                  hd: false,
+                },
+                {
+                  ty: 'tr',
+                  p: { a: 0, k: [0, 0], ix: 2 },
+                  a: { a: 0, k: [0, 0], ix: 1 },
+                  s: { a: 0, k: [100, 100], ix: 3 },
+                  r: { a: 0, k: 0, ix: 6 },
+                  o: { a: 0, k: 100, ix: 7 },
+                  sk: { a: 0, k: 0, ix: 4 },
+                  sa: { a: 0, k: 0, ix: 5 },
+                  nm: 'Transform',
+                },
+              ],
+              nm: 'Group 1',
+              np: 3,
+              cix: 2,
+              bm: 0,
+              ix: 1,
+              mn: 'ADBE Vector Group',
+              hd: false,
+            },
+            {
+              ty: 'gr',
+              it: [
+                {
+                  ind: 0,
+                  ty: 'sh',
+                  ix: 1,
+                  ks: {
+                    a: 0,
+                    k: {
+                      i: [
+                        [0, -15.316],
+                        [0, 0],
+                        [1.539, -3.386],
+                        [0.615, -1.001],
+                        [0, 0],
+                        [0, 0],
+                        [0, 5.234],
+                        [-15.393, 0],
+                      ],
+                      o: [
+                        [0, 0],
+                        [-0.077, 3.772],
+                        [-0.385, 1.077],
+                        [0, 0],
+                        [0, 0],
+                        [-2.694, -4.464],
+                        [0, -15.316],
+                        [15.47, 0],
+                      ],
+                      v: [
+                        [123.652, -195.313],
+                        [123.652, -195.005],
+                        [121.266, -184.076],
+                        [119.727, -180.997],
+                        [96.176, -141.668],
+                        [72.009, -180.536],
+                        [67.853, -195.313],
+                        [95.714, -223.174],
+                      ],
+                      c: true,
+                    },
+                    ix: 2,
+                  },
+                  nm: 'Path 1',
+                  mn: 'ADBE Vector Shape - Group',
+                  hd: false,
+                },
+                {
+                  ty: 'st',
+                  c: { a: 0, k: [0.192156866193, 0.168627455831, 0.450980395079, 1], ix: 3 },
+                  o: { a: 0, k: 100, ix: 4 },
+                  w: { a: 0, k: 8, ix: 5 },
+                  lc: 1,
+                  lj: 1,
+                  ml: 10,
+                  bm: 0,
+                  nm: 'Stroke 1',
+                  mn: 'ADBE Vector Graphic - Stroke',
+                  hd: false,
+                },
+                {
+                  ty: 'tr',
+                  p: { a: 0, k: [0, 0], ix: 2 },
+                  a: { a: 0, k: [0, 0], ix: 1 },
+                  s: { a: 0, k: [100, 100], ix: 3 },
+                  r: { a: 0, k: 0, ix: 6 },
+                  o: { a: 0, k: 100, ix: 7 },
+                  sk: { a: 0, k: 0, ix: 4 },
+                  sa: { a: 0, k: 0, ix: 5 },
+                  nm: 'Transform',
+                },
+              ],
+              nm: 'Group 2',
+              np: 2,
+              cix: 2,
+              bm: 0,
+              ix: 2,
+              mn: 'ADBE Vector Group',
+              hd: false,
+            },
+            {
+              ty: 'gr',
+              it: [
+                {
+                  ind: 0,
+                  ty: 'sh',
+                  ix: 1,
+                  ks: {
+                    a: 0,
+                    k: {
+                      i: [
+                        [0, -15.316],
+                        [0, 0],
+                        [1.539, -3.386],
+                        [0.615, -1.001],
+                        [0, 0],
+                        [0, 0],
+                        [0, 5.234],
+                        [-15.393, 0],
+                      ],
+                      o: [
+                        [0, 0],
+                        [-0.077, 3.772],
+                        [-0.385, 1.077],
+                        [0, 0],
+                        [0, 0],
+                        [-2.694, -4.464],
+                        [0, -15.316],
+                        [15.47, 0],
+                      ],
+                      v: [
+                        [123.652, -195.313],
+                        [123.652, -195.005],
+                        [121.266, -184.076],
+                        [119.727, -180.997],
+                        [96.176, -141.668],
+                        [72.009, -180.536],
+                        [67.853, -195.313],
+                        [95.714, -223.174],
+                      ],
+                      c: true,
+                    },
+                    ix: 2,
+                  },
+                  nm: 'Path 1',
+                  mn: 'ADBE Vector Shape - Group',
+                  hd: false,
+                },
+                {
+                  ty: 'fl',
+                  c: { a: 0, k: [0.192156866193, 0.168627455831, 0.450980395079, 1], ix: 4 },
+                  o: { a: 0, k: 100, ix: 5 },
+                  r: 1,
+                  bm: 0,
+                  nm: 'Fill 1',
+                  mn: 'ADBE Vector Graphic - Fill',
+                  hd: false,
+                },
+                {
+                  ty: 'tr',
+                  p: { a: 0, k: [0, 0], ix: 2 },
+                  a: { a: 0, k: [0, 0], ix: 1 },
+                  s: { a: 0, k: [100, 100], ix: 3 },
+                  r: { a: 0, k: 0, ix: 6 },
+                  o: { a: 0, k: 100, ix: 7 },
+                  sk: { a: 0, k: 0, ix: 4 },
+                  sa: { a: 0, k: 0, ix: 5 },
+                  nm: 'Transform',
+                },
+              ],
+              nm: 'Group 3',
+              np: 2,
+              cix: 2,
+              bm: 0,
+              ix: 3,
+              mn: 'ADBE Vector Group',
+              hd: false,
+            },
+          ],
           ip: 0,
-          op: 60,
+          op: 180,
           st: 0,
+          ct: 1,
           bm: 0,
         });
 
-        const data = json;
-
         lottie.destroy();
 
         lottie.loadAnimation({
-          container: document.getElementById('lottie-animation'), // 애니메이션을 보여줄 div 요소
-          renderer: 'svg', // 렌더링 방식 (canvas 또는 svg)
-          loop: true, // 애니메이션을 반복할지 여부
-          autoplay: true, // 자동 재생할지 여부
-          animationData: data,
-        });
-      });
-  }
-
-  function deleteCircle() {
-    fetch('./a.json')
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => {
-        json['layers'].forEach((layer, idx) => {
-          if (layer['nm'] === 'circles2') {
-            json['layers'].splice(idx, idx);
-          }
-        });
-
-        lottie.destroy();
-
-        lottie.loadAnimation({
-          container: document.getElementById('lottie-animation'), // 애니메이션을 보여줄 div 요소
-          renderer: 'svg', // 렌더링 방식 (canvas 또는 svg)
-          loop: true, // 애니메이션을 반복할지 여부
-          autoplay: true, // 자동 재생할지 여부
+          container: document.getElementById('lottie-animation'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
           animationData: json,
         });
       });
-  }
-
-  const addBtn = document.getElementById('add-btn');
-  addBtn.addEventListener('click', makeCircle);
-
-  const deleteBtn = document.getElementById('delete-btn');
-  deleteBtn.addEventListener('click', deleteCircle);
+  });
 })();
